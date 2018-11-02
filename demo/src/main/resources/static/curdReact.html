@@ -88,6 +88,7 @@ class App extends React.Component {
     };
     this.copy = this.copy.bind(this);
     this.fetchdata = this.fetchdata.bind(this);
+    this.fetchdata1 = this.fetchdata1.bind(this);
     this.updateOrder = this.updateOrder.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
     this.editOrder = this.editOrder.bind(this);
@@ -128,17 +129,27 @@ class App extends React.Component {
       that.setState({ order: ord });
     };
   }
-  fetchdata(){
+  fetchdata1(){this.fetchdata("PUT",this.state.tempOrder)}
+  fetchdata(method,parameter){
     var that=this;
-      console.log(that.state.tempOrder);
-        axios.get('http://localhost:8080/login',{params:this.state.tempOrder})
-        .then(function (response) {
-            console.log(response);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+    if(method==="GET"||method==="get"){
+        axios.get('http://localhost:8080/request',{params:parameter})
+        .then(function (response) {return response;}).catch(function (error) {console.log(error);return error;});
     }
+    else if(method==="PUT"||method==="put"){
+        axios.put('http://localhost:8080/request',{params:parameter})
+        .then(function (response) {return response;}).catch(function (error) {console.log(error);return error;});
+    }
+    else if(method==="DELETE"||method==="delete"){
+        axios.delete('http://localhost:8080/request',{params:parameter})
+        .then(function (response) {return response;}).catch(function (error) {console.log(error);return error;});
+    }
+    else if(method==="POST"||method==="post"){
+        axios.post('http://localhost:8080/request',{parameter})
+        .then(function (response) {return response;}).catch(function (error) {console.log(error);return error;});
+    }
+    else return "Incorrect method";
+  }
   editOrder(e) {
     var that = this;
     return function() {
@@ -246,7 +257,7 @@ class App extends React.Component {
               </button>
             </td>
             <td>
-                <button onClick={this.fetchdata}>Fetch Data</button>
+                <button onClick={this.fetchdata1}>Fetch Data</button>
             </td>
           </tr>
         </table>
@@ -264,3 +275,4 @@ ReactDOM.render(<App />, document.getElementById("form"));
   </body>
 
 </html>
+
