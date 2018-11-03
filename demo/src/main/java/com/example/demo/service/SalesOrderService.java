@@ -11,11 +11,11 @@ public class SalesOrderService {
 	@Autowired
 	private SalesOrderReposoitry salesOrderRepository;
 
-	public SalesOrderModel create(String orderId, String customerName, String date, String place) {
-		return salesOrderRepository.save(new SalesOrderModel(orderId, customerName, date, place));
+	public SalesOrderModel create(int orderId, String customerName, String date, String place) {
+		return salesOrderRepository.save(new SalesOrderModel(orderId,0, customerName, date, place));
 	}
 
-	public SalesOrderModel update(String orderId, String customerName, String date, String place) {
+	public SalesOrderModel update(int orderId, String customerName, String date, String place) {
 		SalesOrderModel SOM = salesOrderRepository.findByOrderId(orderId);
 		SOM.setOrderId(orderId);
 		SOM.setCustomerName(customerName);
@@ -28,11 +28,11 @@ public class SalesOrderService {
 		return salesOrderRepository.findAll();
 	}
 
-	public SalesOrderModel retrive(String orderId) {
+	public SalesOrderModel retrive(int orderId) {
 		return salesOrderRepository.findByOrderId(orderId);
 	}
 
-	public void delete(String orderId) {
+	public void delete(int orderId) {
 		SalesOrderModel SOM = salesOrderRepository.findByOrderId(orderId);
 		salesOrderRepository.delete(SOM);
 	}

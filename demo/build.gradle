@@ -18,12 +18,9 @@ apply plugin: 'io.spring.dependency-management'
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
-
 repositories {
 	mavenCentral()
 }
-
-
 dependencies {
 	compile 'org.mongodb:mongodb-driver-sync:3.8.2'
 	implementation('org.springframework.boot:spring-boot-starter-data-mongodb')

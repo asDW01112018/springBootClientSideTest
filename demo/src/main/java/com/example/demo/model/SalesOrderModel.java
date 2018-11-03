@@ -9,14 +9,22 @@ public class SalesOrderModel {
 
 	@Id
 	String id;
-	String orderId;
+	int orderId;
+	int edit;
+	
+	public int getEdit() {
+		return edit;
+	}
+	public void setEdit(int edit) {
+		this.edit = edit;
+	}
 	String customerName;
 	String date;
 	String place;
-	public String getOrderId() {
+	public int getOrderId() {
 		return orderId;
 	}
-	public void setOrderId(String orderId) {
+	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
 	public String getCustomerName() {
@@ -37,9 +45,10 @@ public class SalesOrderModel {
 	public void setPlace(String place) {
 		this.place = place;
 	}
-	public SalesOrderModel(String id, String customerName, String date, String place) {
+	public SalesOrderModel(int orderId,int edit, String customerName, String date, String place) {
 		super();
-		this.id = id;
+		this.orderId = orderId;
+		this.edit=edit;
 		this.customerName = customerName;
 		this.date = date;
 		this.place = place;

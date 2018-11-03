@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script type="text/babel" >class Row extends React.Component {
+class Row extends React.Component {
   render() {
     return (
       <tr>
@@ -240,7 +229,7 @@ class App extends React.Component {
   deleteSalesOrder(e) {
     var that = this;
     return function() {
-      that.fetchdata("DELETE", { 'orderId': e });
+      that.fetchdata("DELETE", { orderId: e });
       var ord = that.state.salesOrder.filter(
         salesOrder => salesOrder.orderId !== e
       );
@@ -354,12 +343,4 @@ class App extends React.Component {
     );
   }
 }
-ReactDOM.render(<App />, document.getElementById("form"));</script>
-    <title>Sales Order Application</title>
-</head>
-
-<body>
-    <div id="form"></div>
-</body>
-
-</html>
+ReactDOM.render(<App />, document.getElementById("form"));

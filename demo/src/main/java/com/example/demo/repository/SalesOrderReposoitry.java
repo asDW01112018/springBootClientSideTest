@@ -7,5 +7,5 @@ import com.example.demo.model.SalesOrderModel;
 
 @Repository
 public interface SalesOrderReposoitry extends MongoRepository<SalesOrderModel, String>{
-	public SalesOrderModel  findByOrderId(String orderId);
+	public SalesOrderModel  findByOrderId(int orderId);
 }
