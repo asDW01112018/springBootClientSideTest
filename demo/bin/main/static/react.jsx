@@ -109,7 +109,7 @@ class App extends React.Component {
   componentDidMount() {
     var count = 0,
       i = 0;
-    fetch("http://localhost:8080/requestAll")
+    fetch("http://localhost:9000/requestAll")
       .then(response => {
         return response.json();
       })
@@ -132,16 +132,24 @@ class App extends React.Component {
   updateSalesOrder(e) {
     var that = this;
     return function() {
-      that.state.tempEdit.edit = 0;
-      var ord = that.state.salesOrder.map(function(salesOrder) {
-        if (salesOrder.orderId === e) return that.state.tempEdit;
-        else {
-          salesOrder.edit = 0;
-          return salesOrder;
-        }
-      });
-      that.fetchdata("UPDATE", that.state.tempEdit);
-      that.setState({ salesOrder: ord });
+      if (this.state.tempEdit.customerName === "") {
+        alert("Customer Name Feild cannot be Empty");
+      } else if (this.state.tempEdit.date === "") {
+        alert("Please Provide Date");
+      } else if (this.state.tempEdit.date === "") {
+        alert("Customer Name Feild cannot be Empty");
+      } else {
+        that.state.tempEdit.edit = 0;
+        var ord = that.state.salesOrder.map(function(salesOrder) {
+          if (salesOrder.orderId === e) return that.state.tempEdit;
+          else {
+            salesOrder.edit = 0;
+            return salesOrder;
+          }
+        });
+        that.fetchdata("UPDATE", that.state.tempEdit);
+        that.setState({ salesOrder: ord });
+      }
     };
   }
   cancelEdit(e) {
@@ -158,7 +166,7 @@ class App extends React.Component {
     var that = this;
     if (method === "GET" || method === "get") {
       axios
-        .get("http://localhost:8080/request", { params: parameter })
+        .get("http://localhost:9000/request", { params: parameter })
         .then(function(response) {
           return response.JSON;
         })
@@ -168,7 +176,7 @@ class App extends React.Component {
     } else if (method === "GETALL" || method === "getall") {
       var count = 0,
         i = 0;
-      fetch("http://localhost:8080/requestAll")
+      fetch("http://localhost:9000/requestAll")
         .then(response => {
           return response.json();
         })
@@ -181,7 +189,7 @@ class App extends React.Component {
         });
     } else if (method === "UPDATE" || method === "update") {
       axios
-        .get("http://localhost:8080/requestUpdate", { params: parameter })
+        .get("http://localhost:9000/requestUpdate", { params: parameter })
         .then(function(response) {
           return response;
         })
@@ -190,7 +198,7 @@ class App extends React.Component {
         });
     } else if (method === "DELETE" || method === "delete") {
       axios
-        .get("http://localhost:8080/request", { params: parameter })
+        .get("http://localhost:9000/request", { params: parameter })
         .then(function(response) {
           return response;
         })
@@ -199,7 +207,7 @@ class App extends React.Component {
         });
     } else if (method === "ADD" || method === "ADD") {
       axios
-        .get("http://localhost:8080/requestAdd", { params: parameter })
+        .get("http://localhost:9000/requestAdd", { params: parameter })
         .then(function(response) {
           return response;
         })
@@ -237,20 +245,28 @@ class App extends React.Component {
     };
   }
   addSalesOrder() {
-    this.state.counter = this.state.counter + 1;
-    this.state.tempSalesOrder.orderId = this.state.counter;
-    console.log(this.state.tempSalesOrder.orderId);
-    this.fetchdata("ADD", this.state.tempSalesOrder);
-    this.state.salesOrder.push(this.state.tempSalesOrder);
-    this.setState({
-      tempSalesOrder: {
-        orderId: null,
-        edit: 0,
-        customerName: "",
-        date: "",
-        place: ""
-      }
-    });
+    if (this.state.tempSalesOrder.customerName === "") {
+      alert("Customer Name Feild cannot be Empty");
+    } else if (this.state.tempSalesOrder.date === "") {
+      alert("Please Provide Date");
+    } else if (this.state.tempSalesOrder.date === "") {
+      alert("Customer Name Feild cannot be Empty");
+    } else {
+      this.state.counter = this.state.counter + 1;
+      this.state.tempSalesOrder.orderId = this.state.counter;
+      console.log(this.state.tempSalesOrder.orderId);
+      this.fetchdata("ADD", this.state.tempSalesOrder);
+      this.state.salesOrder.push(this.state.tempSalesOrder);
+      this.setState({
+        tempSalesOrder: {
+          orderId: null,
+          edit: 0,
+          customerName: "",
+          date: "",
+          place: ""
+        }
+      });
+    }
   }
   handleChange(key) {
     var that = this;

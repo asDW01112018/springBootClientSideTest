@@ -3,8 +3,10 @@ package com.example.demo.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.transaction.annotation.Transactional;
 
 @Document(collection = "abc")
+@Transactional
 public class SalesOrderModel {
 
 	@Id
